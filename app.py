@@ -7,8 +7,8 @@ from email.mime.multipart import MIMEMultipart
 app = Flask(__name__)
 
 # بيانات الإيميل (غيّرها ببياناتك)
-EMAIL_ADDRESS = "ana.t4roka@gmail.com"
-EMAIL_PASSWORD = "AAtt07.2024"
+EMAIL_ADDRESS = "Zedny883@gmail.com"
+EMAIL_PASSWORD = "00981395200."
 ADMIN_EMAIL = "ana.taroka@gmail.com"
 
 # HTML بالإنجليزي + CSS
@@ -135,5 +135,6 @@ def validate_expiry(expiry):
 
 if __name__ == '__main__':
     app.run()
+
 
 
